@@ -4,7 +4,7 @@ export function WordSearch(){
 
     const [searchedWord, setSearchedWord] = useState<string>("Hello")
     const [errorMessage, setErrormessage] = useState<string>("");
-    const [definitions, setDefinitions] = useState<Array<string>>([]);
+    const [definitions, setDefinitions] = useState<string[]>([]);
 
     useEffect(() => {
         getWordDefinitions()
