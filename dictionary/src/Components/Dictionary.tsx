@@ -4,7 +4,7 @@ export function WordSearch(){
 
     const [searchedWord, setSearchedWord] = useState<string>("Hello")
     const [errorMessage, setErrormessage] = useState<string>("");
-    const [definitions, setDefinitions] = useState([]);
+    const [definitions, setDefinitions] = useState<Array<string>>([]);
 
     useEffect(() => {
         getWordDefinitions()
@@ -16,8 +16,8 @@ export function WordSearch(){
         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
         const json = await response.json();
         return json[0].meanings
-            .flatMap((m: { definitions: any; }) => m.definitions)
-            .flatMap((d: { definition: any; }) => d.definition);
+            .flatMap(m => m.definitions)
+            .flatMap(d => d.definition);
     };
     
     const getWordDefinitions = () => {
@@ -28,7 +28,7 @@ export function WordSearch(){
         }
         fetchWordDefinitions(word)
             .then(definitions => {
-                definitions.map((d: any) => {
+                definitions.map((d: Array<string>) => {
                     setDefinitions([...definitions, d])
                     console.log(d)
                 })
@@ -47,7 +47,7 @@ export function WordSearch(){
                                                                                     font-sans font-lg"></input>
             <button className="border-black border-2 rounded bg-sky-500 text-white drop-shadow" onClick={getWordDefinitions}>Search Word</button>
             <div className="text-center bg-sky-900 text-white p-2 rounded-md font-sans italic
-                                selection:text-black selection:bg-white">{definitions.map((definition:Array<string>) => <p>{definition}</p>)}</div>
+                                selection:text-black selection:bg-white">{definitions.map((definition) => <p key={crypto.randomUUID()}>{definition}</p>)}</div>
             <p className="bg-gray text-white rounded-lg text-md font-sans">{errorMessage}</p>
         </div>
     );
