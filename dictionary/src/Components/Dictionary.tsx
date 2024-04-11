@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { HTMLInputTypeAttribute, useEffect, useState } from "react";
 
 export function WordSearch(){
 
@@ -16,12 +16,14 @@ export function WordSearch(){
         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
         const json = await response.json();
         return json[0].meanings
-            .flatMap(m => m.definitions)
-            .flatMap(d => d.definition);
+            .flatMap((m: { definitions: any; }) => m.definitions)
+            .flatMap((d: { definition: any; }) => d.definition);
     };
     
     const getWordDefinitions = () => {
-        setSearchedWord(document.querySelector("#wordInput").value)
+
+        const inputInfo:any = document.querySelector("#wordInput");
+        setSearchedWord(inputInfo.value);
         const word = searchedWord;
         if (word == null || word == '') {
             return alert('Error: You must enter a word to fetch');
