@@ -21,8 +21,7 @@ export function WordSearch(){
     };
     
     const getWordDefinitions = () => {
-
-        const inputInfo:any = document.querySelector("#wordInput");
+        const inputInfo:HTMLInputElement = document.querySelector("#wordInput")!;
         setSearchedWord(inputInfo.value);
         const word = searchedWord;
         if (word == null || word == '') {
