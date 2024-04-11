@@ -16,8 +16,8 @@ export function WordSearch(){
         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
         const json = await response.json();
         return json[0].meanings
-            .flatMap((m) => m.definitions)
-            .flatMap((d) => d.definition);
+            .flatMap((m: { definitions: any; }) => m.definitions)
+            .flatMap((d: { definition: any; }) => d.definition);
     };
     
     const getWordDefinitions = () => {
@@ -28,7 +28,7 @@ export function WordSearch(){
         }
         fetchWordDefinitions(word)
             .then(definitions => {
-                definitions.map((d) => {
+                definitions.map((d: any) => {
                     setDefinitions([...definitions, d])
                     console.log(d)
                 })
