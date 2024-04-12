@@ -36,7 +36,7 @@ export function WordSearch(){
             })
             .catch(_ => {
                 setErrormessage(`Error: Could not retrieve any definitions for ${word}`)
-                alert(errorMessage)
+                console.error(errorMessage)
             });
     };
 
@@ -47,8 +47,10 @@ export function WordSearch(){
             <input defaultValue={"Hello"} type="text" id="wordInput" className="border-2 rounded-sm border-black shadow-md bg-sky-50
                                                                                     font-sans font-lg"></input>
             <button className="border-black border-2 rounded bg-sky-500 text-white drop-shadow" onClick={getWordDefinitions}>Search Word</button>
-            <div className="text-center bg-sky-900 text-white p-2 rounded-md font-sans italic
-                                selection:text-black selection:bg-white">{definitions.map((definition) => <p key={crypto.randomUUID()}>{definition}</p>)}</div>
+            <div className="text-center bg-sky-900 text-white p-2 rounded-md
+                                    font-sans italic
+                                selection:text-black selection:bg-white">{definitions.map((definition) => <p key={crypto.randomUUID()}>{definition}</p>)}
+            </div>
             <p className="bg-gray text-white rounded-lg text-md font-sans">{errorMessage}</p>
         </div>
     );
