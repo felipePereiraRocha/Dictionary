@@ -18,6 +18,7 @@ export function WordSearch(){
         return json[0].meanings
             .flatMap((m: { definitions: any; }) => m.definitions)
             .flatMap((d: { definition: any; }) => d.definition)
+        
     };
     
     const getWordDefinitions = () => {
@@ -45,9 +46,13 @@ export function WordSearch(){
                                                                                     font-sans font-lg"></input>
             <button className="border-black border-2 rounded bg-sky-500 text-white drop-shadow" onClick={getWordDefinitions}>Search Word</button>
             <div className="text-center bg-sky-900 text-white p-3 rounded-md
-                                    font-sans italic
+                                    font-sans
                                 selection:text-black selection:bg-white
-                                scale-transition">{definitions.map((definition) => <p key={crypto.randomUUID()}>{definition}</p>)}
+                                scale-transition">
+                                    <h1 className="text-center font-bold
+                                                    italic underline decoration-2
+                                                        my-1 text-lg">Definitions for {searchedWord}</h1>
+                                    {definitions.map((definition) => <p className="italic" key={crypto.randomUUID()}>"{definition}"</p>)}
             </div>
         </div>
     );
