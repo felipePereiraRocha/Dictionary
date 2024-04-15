@@ -33,7 +33,7 @@ export function WordSearch(){
     
     const getWordDefinitions = () => {
         const inputInfo:HTMLInputElement = document.querySelector("#wordInput")!;
-        setSearchedWord(inputInfo.value);
+        setSearchedWord(inputInfo.value.toLowerCase());
         const word = searchedWord;
         if (word == null || word == '') {
             return alert('Error: You must enter a word to fetch');
@@ -44,6 +44,7 @@ export function WordSearch(){
         })
         .catch(_=> {
             setErrormessage(`Error: Could not retrieve any definitions for ${word}`)
+            setDefinitions([`Could not find definitions for ${word}. have you typed correctly?`])
             console.error(errorMessage)
         });
     };
