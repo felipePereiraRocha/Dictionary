@@ -1,20 +1,30 @@
 import { useEffect, useState } from "react";
+import { HiMiniSpeakerWave } from "react-icons/hi2";
 
 export function WordSearch(){
 
     const [searchedWord, setSearchedWord] = useState<string>("Hello")
     const [errorMessage, setErrormessage] = useState<string>("");
     const [definitions, setDefinitions] = useState<string[]>([]);
+    const [phonetics, setPhonetics] = useState<string>("");
+    const [pronunciation ,setPronunciation] = useState(new Audio())
 
     useEffect(() => {
         getWordDefinitions()
     },[searchedWord])
 
+    const playAudio = () => {
+        pronunciation.play()
+    }
 
     const fetchWordDefinitions = async (word: string) => {
         console.log(`Making request for definitions of ${word}...`);
         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
         const json = await response.json();
+        setPhonetics(json[0].phonetics[1].text);
+        setPronunciation(new Audio(json[0].phonetics[1].audio));
+        console.log(json[0]);
+        
         return json[0].meanings
             .flatMap((m: { definitions: any; }) => m.definitions)
             .flatMap((d: { definition: any; }) => d.definition)
@@ -51,8 +61,11 @@ export function WordSearch(){
                                 scale-transition">
                                     <h1 className="text-center font-bold
                                                     italic underline decoration-2
-                                                        my-1 text-lg">Definitions for {searchedWord}</h1>
-                                    {definitions.map((definition) => <p className="italic" key={crypto.randomUUID()}>"{definition}"</p>)}
+                                                        my-2 text-lg">Definitions for {searchedWord} <br/>
+                                                                        <span onClick={playAudio} className="my-3 cursor-pointer"><button className="bg-sky-700 p-1 rounded-lg mr-1"><HiMiniSpeakerWave/></button>
+                                                                        {phonetics}</span>
+                                                                        </h1>
+                                    {definitions.map((definition) => <p className="italic text-lg" key={crypto.randomUUID()}>"{definition}"</p>)}
             </div>
         </div>
     );
