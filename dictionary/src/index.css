@@ -7,6 +7,7 @@
     animation: change-scale 0.2s ease-in-out;
 }
 
+
 @keyframes change-scale {
     from {transform: scaleY(50%);}
     to {transform: scaleY(100%);}

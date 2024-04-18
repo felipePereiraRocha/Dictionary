@@ -63,7 +63,8 @@ export function WordSearch(){
                                     <h1 className="text-center font-bold
                                                     italic underline decoration-2
                                                         my-2 text-lg">Definitions for {searchedWord} <br/>
-                                                                        <span onClick={playAudio} className="my-3 cursor-pointer"><button className="bg-sky-700 p-1 rounded-lg mr-1"><HiMiniSpeakerWave/></button>
+                                                                        <span onClick={playAudio} className="my-3 cursor-pointer">
+                                                                            <button className="bg-sky-700 p-1 rounded-lg mr-1"><HiMiniSpeakerWave/></button>
                                                                         {phonetics}</span>
                                                                         </h1>
                                     {definitions.map((definition) => <p className="italic text-lg" key={crypto.randomUUID()}>"{definition}"</p>)}
