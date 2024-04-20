@@ -8,6 +8,7 @@ export function WordSearch(){
     const [definitions, setDefinitions] = useState<string[]>([]);
     const [phonetics, setPhonetics] = useState<string>("");
     const [pronunciation ,setPronunciation] = useState(new Audio())
+    const [hasFound, setHasFound] = useState<boolean>(true);
 
     useEffect(() => {
         getWordDefinitions()
@@ -45,6 +46,8 @@ export function WordSearch(){
         .catch(_=> {
             setErrormessage(`Error: Could not retrieve any definitions for ${word}`)
             setDefinitions([`Could not find definitions for ${word}. have you typed correctly?`])
+            setSearchedWord(inputInfo.value.toLowerCase());
+            setHasFound(false)
             console.error(errorMessage)
         });
     };
@@ -60,13 +63,13 @@ export function WordSearch(){
                                     font-sans
                                 selection:text-black selection:bg-white
                                 scale-transition">
-                                    <h1 className="text-center font-bold
+                                    {hasFound? <h1 className="text-center font-bold
                                                     italic underline decoration-2
                                                         my-2 text-lg">Definitions for {searchedWord} <br/>
                                                                         <span onClick={playAudio} className="my-3 cursor-pointer">
                                                                             <button className="bg-sky-700 p-1 rounded-lg mr-1"><HiMiniSpeakerWave/></button>
                                                                         {phonetics}</span>
-                                                                        </h1>
+                                                                        </h1>: null}
                                     {definitions.map((definition) => <p className="italic text-lg" key={crypto.randomUUID()}>"{definition}"</p>)}
             </div>
         </div>

@@ -1,6 +1,6 @@
 export function Footer(){
     return(
-        <footer className="fixed bottom-0 
+        <footer className="absolute bottom-0 
                             m-0 p-4
                             w-screen
                             text-center
