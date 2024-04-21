@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HiMiniSpeakerWave } from "react-icons/hi2";
 
 export function WordSearch(){
@@ -9,6 +9,7 @@ export function WordSearch(){
     const [phonetics, setPhonetics] = useState<string>("");
     const [pronunciation ,setPronunciation] = useState(new Audio())
     const [hasFound, setHasFound] = useState<boolean>(true);
+    const searchRef = useRef<HTMLInputElement | null>(null)
 
     useEffect(() => {
         getWordDefinitions()
@@ -33,7 +34,7 @@ export function WordSearch(){
     };
     
     const getWordDefinitions = () => {
-        const inputInfo:HTMLInputElement = document.querySelector("#wordInput")!;
+        const inputInfo:HTMLInputElement = searchRef.current!;
         setSearchedWord(inputInfo.value.toLowerCase());
         const word = searchedWord;
         if (word == null || word == '') {
@@ -56,7 +57,8 @@ export function WordSearch(){
     return(
         <div className="flex flex-col mx-auto my-32 w-2/3 border-black border-2 rounded-lg gap-1 p-3 shadow-xl bg-white">
             <legend className="text-center text-3xl font-bold">Search for a word</legend>
-            <input defaultValue={"Hello"} type="text" id="wordInput" className="border-2 rounded-sm border-black shadow-md bg-sky-50
+            <input defaultValue={"Hello"} type="text" id="wordInput" ref={searchRef}
+                    className="border-2 rounded-sm border-black shadow-md bg-sky-50
                                                                                     font-sans font-lg"></input>
             <button className="border-black border-2 rounded bg-sky-500 text-white drop-shadow" onClick={getWordDefinitions}>Search Word</button>
             <div className="text-center bg-sky-900 text-white p-3 rounded-md
