@@ -53,14 +53,20 @@ export function WordSearch(){
         });
     };
 
+    document.addEventListener("keydown", event => {
+        if(event.key === "Enter") {
+          getWordDefinitions();
+        }
+      })
+
 
     return(
         <div className="flex flex-col mx-auto my-32 w-2/3 border-black border-2 rounded-lg gap-1 p-3 shadow-xl bg-white">
             <legend className="text-center text-3xl font-bold">Search for a word</legend>
             <input defaultValue={"Hello"} type="text" id="wordInput" ref={searchRef}
                     className="border-2 rounded-sm border-black shadow-md bg-sky-50
-                                                                                    font-sans font-lg"></input>
-            <button className="border-black border-2 rounded bg-sky-500 text-white drop-shadow" onClick={getWordDefinitions}>Search Word</button>
+                                                                                    font-sans text-xl"></input>
+            <button className="border-black border-2 text-xl rounded bg-sky-500 text-white drop-shadow" onClick={getWordDefinitions}>Search Word</button>
             <div className="text-center bg-sky-900 text-white p-3 rounded-md
                                     font-sans
                                 selection:text-black selection:bg-white
@@ -73,7 +79,7 @@ export function WordSearch(){
                                                                         {phonetics}</span>
                                                                         </h1>: null}
                                     {definitions.map((definition) => <p className="italic text-lg" key={crypto.randomUUID()}>"{definition}"</p>)}
-            </div>
+            </div> 
         </div>
     );
 }
