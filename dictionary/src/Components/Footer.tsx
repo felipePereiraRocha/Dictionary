@@ -1,6 +1,8 @@
 export function Footer(){
     return(
-        <footer className=" m-0 p-4
+        <footer className="m-0 p-4
+                            relative
+                            bottom-0
                             w-screen
                             text-center
                             bg-sky-800 text-white">
