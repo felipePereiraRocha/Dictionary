@@ -61,9 +61,9 @@ export function WordSearch(){
 
 
     return(
-        <div className="flex flex-col mx-auto my-32 w-2/3 border-black border-2 rounded-lg gap-1 p-3 shadow-xl bg-white">
+        <div className="flex flex-grow-[1] flex-col mx-auto my-32 w-2/3 border-black border-2 rounded-lg gap-1 p-3 shadow-xl bg-white">
             <legend className="text-center text-3xl font-bold">Search for a word</legend>
-            <input defaultValue={"Hello"} type="text" id="wordInput" ref={searchRef}
+            <input defaultValue={"hello"} type="text" id="wordInput" ref={searchRef}
                     className="border-2 rounded-sm border-black shadow-md bg-sky-50
                                                                                     font-sans text-xl"></input>
             <button className="border-black border-2 text-xl rounded bg-sky-500 text-white drop-shadow" onClick={getWordDefinitions}>Search Word</button>
